@@ -1,0 +1,44 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+/* browsers are getting more consistent in rendering a website */
+/* h1 / main heading -> browser always adds margin/padding */
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+/* font is inherited; */
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  /*! this creates the scrollbar; height of the body is already 100%  */
+  padding: 30px;
+}
+
+.header {
+  /* at any point, take 95% of the viewport height */
+  height: 95vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 131, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* take the full size of the container. also have contain, contain no-repeat, etc*/
+  background-size: cover;
+  /* set the initial pos for each background image; when resizing this defines from where the img will be cropped */
+  background-position: top;
+  /* 100% of the width of the parent container located to the right from the beginning */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+}
