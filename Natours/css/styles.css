@@ -41,4 +41,44 @@ body {
   background-position: top;
   /* 100% of the width of the parent container located to the right from the beginning */
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+}
+
+.logo-box {
+  position: absolute;
+  /*? we count from a parent element which has its position set to anything diff from static; IF the parent el is set to static, the positioning is relative to the 'html' element, the root.  */
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  height: 35px;
+}
+
+.text-box {
+  position: absolute;
+  /* просто позиционирайки по този начин резултата не е задоволителен. то е на 50% центрирано, но горния му ляв ъгъл е точката, която е центрирана, не центъра на елемента! */
+  top: 50%;
+  left: 50%;
+  /* x, y;  in relation to the element itself, not to the parent.*/
+  transform: translate(-50%, -50%);
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.heading-primary-main {
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
 }
