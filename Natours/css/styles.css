@@ -28,7 +28,10 @@ body {
 
 .header {
   /* at any point, take 95% of the viewport height */
+  /* which is why the background image of the header element doesn't zoom; it always stays relative to the vh;  */
   height: 95vh;
+
+  /* ! background-image doesn't  */
   background-image: linear-gradient(
       to right bottom,
       rgba(126, 213, 111, 0.8),
@@ -36,7 +39,7 @@ body {
     ),
     url(../img/hero.jpg);
   /* take the full size of the container. also have contain, contain no-repeat, etc*/
-  background-size: cover;
+  background-size: contain;
   /* set the initial pos for each background image; when resizing this defines from where the img will be cropped */
   background-position: top;
   /* 100% of the width of the parent container located to the right from the beginning */
@@ -55,6 +58,10 @@ body {
   height: 35px;
 }
 
+.logo:hover {
+  animation: moveInRight 1s ease-out;
+}
+
 .text-box {
   position: absolute;
   /* просто позиционирайки по този начин резултата не е задоволителен. то е на 50% центрирано, но горния му ляв ъгъл е точката, която е центрирана, не центъра на елемента! */
@@ -67,6 +74,9 @@ body {
 .heading-primary {
   color: #fff;
   text-transform: uppercase;
+  /* fix for animation bumps; in our case the entire 'heading-primary' element moves */
+  /* An element's back face is a mirror image of its front face. Though invisible in 2D, the back face can become visible when a transformation causes the element to be rotated in 3D space. (This property has no effect on 2D transforms, which have no perspective.) */
+  backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -74,6 +84,19 @@ body {
   font-size: 60px;
   font-weight: 400;
   letter-spacing: 35px;
+
+  /* the 'moveInLeft' we have defined on bot; i guess this is how you invoke it */
+  /* the animation triggers on site load */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+
+  /* how it animates in the allocated time */
+  animation-timing-function: ease-in;
+
+  /*? how many times the animation will repeat */
+  /* animation-iteration-count: 3; */
+  /*? delay before animation starts */
+  /* animation-delay: 3s; */
 }
 
 .heading-primary-sub {
@@ -81,4 +104,39 @@ body {
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 17.4px;
+  animation: moveInRight 1s ease-out;
+}
+
+/* the browser is only optimized for opacity and transform; for these 2 props.  */
+/* with 'transform' we can do a whole lot more. */
+/* here you state what happens in the animation timeline */
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  80% {
+    transform: translateX(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  80% {
+    transform: translateX(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
