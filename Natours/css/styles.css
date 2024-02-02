@@ -39,7 +39,7 @@ body {
     ),
     url(../img/hero.jpg);
   /* take the full size of the container. also have contain, contain no-repeat, etc*/
-  background-size: contain;
+  background-size: cover;
   /* set the initial pos for each background image; when resizing this defines from where the img will be cropped */
   background-position: top;
   /* 100% of the width of the parent container located to the right from the beginning */
@@ -69,6 +69,9 @@ body {
   left: 50%;
   /* x, y;  in relation to the element itself, not to the parent.*/
   transform: translate(-50%, -50%);
+  /* Describes how inline contents of a block are horizontally aligned if the contents do not completely fill the line box. */
+  /* in our case: the 2 spans and the anchor tag */
+  text-align: center;
 }
 
 .heading-primary {
@@ -77,6 +80,7 @@ body {
   /* fix for animation bumps; in our case the entire 'heading-primary' element moves */
   /* An element's back face is a mirror image of its front face. Though invisible in 2D, the back face can become visible when a transformation causes the element to be rotated in 3D space. (This property has no effect on 2D transforms, which have no perspective.) */
   backface-visibility: hidden;
+  margin-bottom: 60px;
 }
 
 .heading-primary-main {
@@ -139,4 +143,81 @@ body {
     opacity: 1;
     transform: translate(0);
   }
+}
+
+/* first means that the link hasn't been clicked, the second that it has */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  /*shorthand for:  transition-property, transition-duration, transition-timing-function, transition-delay, and transition-behavior. */
+  /* this refers all pseudoclasses downards: :hover, :active */
+  transition: all 0.2s;
+  position: relative;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* it hovers because of the shadow */
+.btn:active {
+  /* always in relation to the initial state, not the hovered state!  */
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
+  border-radius: 100px;
+}
+
+/* after pseudo el: add an element right after the element being selected; pseudo html?  */
+/* in this case we will create a 'pseudo button' that sits exactly behind our button for 3d fx */
+/*? the pseudo element here is treated like a child of the button */
+.btn::after {
+  /* mandatory to have content and display prop */
+  content: "";
+  display: inline-block;
+  /* exact same dimensions as the 'parent' button */
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-white::after {
+  background-color: #fff;
+}
+
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+/* after pseudo el only on hover state */
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+
+.btn-animated {
+  animation: moveInBottom 0.5s ease-out 0.75s;
+  /* reset to initial state */
+  animation-fill-mode: backwards;
 }
